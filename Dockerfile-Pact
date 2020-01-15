@@ -1,0 +1,7 @@
+FROM openjdk:8
+ADD . /src
+WORKDIR /src
+##To change user to a non root user .
+RUN groupadd -r ms-accelerator && useradd --no-log-init -r -m -g ms-accelerator quote-predictor && chown -R ms-accelerator:ms-accelerator /src
+USER ms-accelerator
+CMD ["./gradlew", "clean", "ms-accelerator-consumer-pact:test", "ms-accelerator-consumer-pact:pactPublish", "--info"]

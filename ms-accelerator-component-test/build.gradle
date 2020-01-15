@@ -1,0 +1,28 @@
+plugins {
+    id 'net.ltgt.apt' version '0.9'
+    id "au.com.dius.pact" version "3.5.14"
+}
+
+group = "com.sapient.quote-predictor-service"
+description = 'MS Accelerator component test'
+
+
+dependencies {
+    compile libs.dependencyManagement
+    testCompile project(':ms-accelerator-service')
+    testCompile libs.springBootStarterTest
+    testCompile libs.sprintCloudContract
+    testCompile libs.pact_jvm_consumer_java8
+    testCompile libs.awaitility
+
+    testCompile libs.mapstruct
+    testCompile libs.mapstructProcessor
+
+    testCompile libs.junit
+    testCompile libs.assertJ
+    testCompile libs.mockito
+    testCompile libs.jackson_datatype
+    testCompile libs.rxjava
+    testCompile libs.pact_jvm_provider_spring
+    testCompile libs.mockserver_netty
+}

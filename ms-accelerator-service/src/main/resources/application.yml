@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: ms-accelerator-service
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.sapient: INFO
+
+management:
+  endpoints:
+    web:
+      base-path: "/"
+      path-mapping:
+        prometheus: "metrics"
+      exposure:
+        include: ["health", "info", "prometheus"]
+  endpoint:
+    prometheus:
+      enabled: true
+  info:
+    git:
+      mode: full

@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'net.ltgt.apt' version '0.9'
+    id "au.com.dius.pact" version "3.5.14"
+}
+
+apply plugin: 'java'
+group = "com.sapient.ms-accelerator-service"
+description = 'Consumer PACT'
+
+dependencies {
+
+    compile project(':ms-accelerator-service')
+    testCompile libs.springBootStarterTest
+    testCompile libs.sprintCloudContract
+    testCompile libs.pact_jvm_consumer_java8
+
+    testCompile libs.mapstruct
+    testCompile libs.mapstructProcessor
+
+    testCompile libs.junit
+    testCompile libs.assertJ
+    testCompile libs.mockito
+
+    testCompile libs.jackson_datatype
+    testCompile libs.rxjava
+    testCompile libs.springBootJpa
+    annotationProcessor libs.lombok
+}
+test {
+    systemProperty 'pact.verifier.publishResults', 'true'
+    systemProperties['pact.rootDir'] = "$buildDir/pacts"
+
+}
+
+pact {
+    publish {
+        version = "1.0.0"
+        pactBrokerUrl = project.pactBrokerUrl
+        pactBrokerUsername = project.pactBrokerUser
+        pactBrokerPassword = project.pactBrokerPassword
+    }
+}
+
+pactPublish.dependsOn(check)

@@ -1,0 +1,9 @@
+/*/out/
+/*/build/
+/target
+.DS_Store
+build/
+*.iml
+/out
+*.ipr
+*.iws

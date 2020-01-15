@@ -1,0 +1,4 @@
+rootProject.name = 'ms-accelerator-service'
+include 'ms-accelerator-component-test'
+include 'ms-accelerator-pact'
+include 'ms-accelerator-service'

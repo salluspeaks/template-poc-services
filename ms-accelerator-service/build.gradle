@@ -1,0 +1,107 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.7.RELEASE")
+    }
+}
+
+plugins {
+    id 'net.ltgt.apt' version '0.9'
+    id "com.gorylenko.gradle-git-properties" version "1.4.21"
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+}
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply from: "../gradle/dependencies.gradle"
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'org.springframework.boot'
+
+jacoco {
+    toolVersion = "0.8.2"
+}
+jacocoTestReport {
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    '**/Application.class', '**/config/*', '**/core/*', '**/templates/model/*', '**/constants/*'
+            ])
+        })
+    }
+}
+
+group = 'com.sapient.ms-accelerator-service'
+version = '0.0.1'
+description = 'MS Accelerator Service'
+
+repositories {
+    jcenter()
+}
+configurations {
+    compile.exclude group: 'commons-logging'
+}
+
+
+dependencies {
+    compile libs.springBoot
+    compile(libs.springBootWeb) {
+        exclude group: 'org.apache.tomcat.embed'
+    }
+    compile libs.springCore
+    compile("org.apache.tomcat.embed:tomcat-embed-core:9.0.22")
+    compile("org.apache.tomcat.embed:tomcat-embed-el:9.0.22")
+    compile("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.22")
+    compile("org.apache.tomcat:tomcat-annotations-api:9.0.22")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.10.1")
+    compile("com.fasterxml.jackson.core:jackson-core:2.10.1")
+    compile libs.springBootActuator
+    compile libs.springfoxSwagger2
+    compile libs.springfoxSwaggerUi
+    compile libs.logStash
+    compile libs.micrometerCore
+    compile libs.micrometerPrometheus
+    compile libs.rxjava
+    compile libs.mapstruct
+    compile libs.mapstructProcessor
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    compile libs.mmapper_core
+    implementation 'com.google.code.gson:gson:2.8.5'
+    testCompile libs.geantyref
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api'
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine'
+    testCompile "org.mockito:mockito-core:2.+"
+    testCompile('org.mockito:mockito-junit-jupiter:2.18.3')
+    testRuntime(group: 'org.junit.vintage', name: 'junit-vintage-engine') {
+        because 'allows JUnit 3 and JUnit 4 tests to run'
+    }
+    testCompile(libs.springBootStarterTest) {
+        exclude group: 'junit', module: 'junit'
+    }
+    testAnnotationProcessor libs.lombok
+    compile libs.commonsIo
+    compile libs.mockserver_netty
+
+
+}
+
+jar {
+    enabled = true
+}
+
+
+bootRun {
+    systemProperties System.properties
+}
+
+bootJar {
+    mainClassName = 'com.ms.accelerator.Application'
+}
+
+test {
+    useJUnitPlatform()
+
+}
