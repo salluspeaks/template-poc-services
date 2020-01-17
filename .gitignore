@@ -31,4 +31,4 @@ build
 
 #System files
 .DS_Store
-.gradle/*.*
+/.gradle/
