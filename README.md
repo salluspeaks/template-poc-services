@@ -1,4 +1,4 @@
-# Funds confirmations service
+# Microservice Accelerator
 
 This document is a guide for new developers, acting as an on-boarding document.
 
