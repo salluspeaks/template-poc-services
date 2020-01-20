@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.sapient.quote.*"})
+@ComponentScan(basePackages = {"com.ms.accelerator.*"})
 public class Application {
 
 
