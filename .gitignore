@@ -23,7 +23,7 @@
 hs_err_pid*
 
 # IDE files
-.idea/*.*
+*/.idea/*
 
 #local build
 target
@@ -31,4 +31,4 @@ build
 
 #System files
 .DS_Store
-/.gradle/
+/.gradle/*
