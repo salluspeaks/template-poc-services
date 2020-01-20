@@ -9,7 +9,6 @@ buildscript {
 
 plugins {
     id 'net.ltgt.apt' version '0.9'
-    id "com.gorylenko.gradle-git-properties" version "1.4.21"
     id "io.spring.dependency-management" version "1.0.7.RELEASE"
 }
 apply plugin: 'maven'
