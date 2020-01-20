@@ -12,7 +12,6 @@ dependencies {
     testCompile project(':ms-accelerator-service')
     testCompile libs.springBootStarterTest
     testCompile libs.sprintCloudContract
-    testCompile libs.pact_jvm_consumer_java8
     testCompile libs.awaitility
 
     testCompile libs.mapstruct
